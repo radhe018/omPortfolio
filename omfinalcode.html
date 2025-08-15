@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pro Video Editor</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Tailwind config (optional custom colors)
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#ff6a00',
+            dark: '#0b0b12',
+            dim: '#12121b',
+          },
+          boxShadow: {
+            soft: '0 10px 30px rgba(0,0,0,0.25)'
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' }
+            },
+            pulseGlow: {
+              '0%, 100%': { boxShadow: '0 0 0px rgba(255,106,0,0.0)' },
+              '50%': { boxShadow: '0 0 30px rgba(255,106,0,0.35)' }
+            },
+            marquee: {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(-50%)' }
+            }
+          },
+          animation: {
+            float: 'float 4s ease-in-out infinite',
+            pulseGlow: 'pulseGlow 2.5s ease-in-out infinite',
+            marquee: 'marquee 30s linear infinite'
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #0b0b12; --card:#12121b; --brand:#ff6a00; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+    /* Neon gradient backdrop */
+    .neon-bg { background: radial-gradient(1200px 500px at 10% -10%, rgba(255,106,0,0.20), transparent),
+                            radial-gradient(1000px 600px at 90% 10%, rgba(0,180,255,0.15), transparent),
+                            radial-gradient(800px 600px at 50% 110%, rgba(160,0,255,0.15), transparent),
+                            #0b0b12; }
+    /* Floating background icons */
+    .bg-icon { position:absolute; opacity:0.07; font-size:80px; pointer-events:none; filter:drop-shadow(0 8px 20px rgba(0,0,0,0.45)); }
+    .tilt-card { transform-style: preserve-3d; transition: transform 300ms ease, box-shadow 300ms ease; }
+    .tilt-card video, .tilt-card img { transform: translateZ(30px); border-radius: 16px; }
+    .scroll-3d { perspective: 1000px; }
+    .video-track::-webkit-scrollbar { height: 10px; }
+    .video-track::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+    .sticky-blur { backdrop-filter: blur(10px); background: rgba(18,18,27,0.65); }
+    .glass { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); }
+    .badge { border:1px solid rgba(255,255,255,0.1); }
+  </style>
+</head>
+<body class="neon-bg text-white">
+  <!-- Background floating icons -->
+  <i class="fa-solid fa-scissors bg-icon animate-float" style="left:6%; top:18%; animation-delay:0.2s"></i>
+  <i class="fa-solid fa-clapperboard bg-icon animate-float" style="right:8%; top:26%; animation-duration:5s"></i>
+  <i class="fa-solid fa-film bg-icon animate-float" style="left:20%; bottom:20%; animation-duration:6s"></i>
+  <i class="fa-solid fa-photo-film bg-icon animate-float" style="right:18%; bottom:14%; animation-delay:0.8s"></i>
+
+  <!-- NAVBAR -->
+  <header class="fixed top-0 inset-x-0 z-50 sticky-blur">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <!-- Logo -->
+        <a href="#home" class="flex items-center gap-2 group">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-primary/20 text-primary group-hover:animate-pulseGlow"> 
+            <i class="fa-solid fa-play"></i>
+          </span>
+          <span class="font-extrabold tracking-tight text-white text-lg">Om Admile</span>
+        </a>
+        <!-- Menu -->
+        <ul class="hidden md:flex items-center gap-6 text-sm font-medium">
+          <li><a class="hover:text-primary transition" href="#home">Home</a></li>
+          <li><a class="hover:text-primary transition" href="#services">Services</a></li>
+          <li><a class="hover:text-primary transition" href="#about">About</a></li>
+          <li><a class="hover:text-primary transition" href="#contact">Contact</a></li>
+        </ul>
+        <!-- Socials -->
+        <div class="flex items-center gap-3">
+          <a class="p-2 rounded-lg hover:bg-white/10 transition" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a class="p-2 rounded-lg hover:bg-white/10 transition" href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a class="p-2 rounded-lg hover:bg-white/10 transition" href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <button id="mobileBtn" class="md:hidden p-2 rounded-lg hover:bg-white/10"><i class="fa-solid fa-bars"></i></button>
+        </div>
+      </div>
+      <!-- Mobile menu -->
+      <div id="mobileMenu" class="md:hidden hidden pb-4">
+        <ul class="grid gap-2 text-sm">
+          <li><a class="block px-2 py-2 rounded-lg hover:bg-white/10" href="#home">Home</a></li>
+          <li><a class="block px-2 py-2 rounded-lg hover:bg-white/10" href="#services">Services</a></li>
+          <li><a class="block px-2 py-2 rounded-lg hover:bg-white/10" href="#about">About</a></li>
+          <li><a class="block px-2 py-2 rounded-lg hover:bg-white/10" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main class="pt-24">
+    <!-- HERO / FIRST PAGE -->
+    <section id="home" class="relative">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
+          <!-- Left: Name + animated text + button -->
+          <div class="space-y-6">
+            <div class="inline-flex gap-2 items-center badge px-3 py-1 rounded-full text-xs uppercase tracking-wider text-white/70">
+              <i class="fa-solid fa-star"></i> Recognized Video Editor
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
+              Hi, I'm <span class="text-primary">Om Admile</span><br/>
+              <span class="text-white/90">Professional Video Editor</span>
+            </h1>
+            <p class="text-white/70 text-base md:text-lg">I create scroll-stopping short videos, cinematic long-form edits, and high-converting ads for brands & creators.</p>
+            <div class="text-lg md:text-xl font-semibold h-8 flex items-center gap-2">
+              <span class="text-white/60">I edit</span>
+              <span id="typing" class="text-primary"></span>
+              <span class="text-white/60">that perform.</span>
+            </div>
+            <div class="flex gap-3">
+              <a href="#contact" class="px-5 py-3 rounded-2xl bg-primary text-black font-semibold shadow-soft hover:opacity-90 transition">Let's Talk</a>
+              <a href="#services" class="px-5 py-3 rounded-2xl glass font-semibold hover:bg-white/10 transition">View Services</a>
+            </div>
+            <!-- Quick badges -->
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span class="text-xs px-3 py-1 rounded-full glass"><i class="fa-solid fa-bolt"></i> 24-48h delivery</span>
+              <span class="text-xs px-3 py-1 rounded-full glass"><i class="fa-solid fa-fire"></i> Hook-first editing</span>
+              <span class="text-xs px-3 py-1 rounded-full glass"><i class="fa-solid fa-square-poll-vertical"></i> Performance-driven</span>
+            </div>
+          </div>
+          <!-- Right: Editor image -->
+          <div class="relative">
+            <div class="absolute -inset-4 rounded-3xl bg-primary/20 blur-2xl"></div>
+            <div class="relative rounded-3xl overflow-hidden border border-white/10 shadow-soft">
+              <img src="omadmile.png" alt="Video Editor at work" class="w-full h-[420px] object-cover"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- moving ticker of skills -->
+      <div class="mt-14 border-t border-white/10 py-4 overflow-hidden">
+        <div class="animate-marquee whitespace-nowrap text-white/60">
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-scissors"></i> Cuts</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles"></i> VFX</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-wave-square"></i> Transitions</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-closed-captioning"></i> Subtitles</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-music"></i> Sound Design</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-sliders"></i> Color Grade</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-regular fa-clock"></i> Fast Turnaround</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES / SECOND PAGE -->
+    <section id="services" class="py-20">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex items-end justify-between gap-6 flex-wrap">
+          <div>
+            <h2 class="text-3xl md:text-4xl font-extrabold">Services</h2>
+            <p class="text-white/70 mt-2">Click a category and browse sample reels. Cards tilt as you scroll (3D perspective).</p>
+          </div>
+          <div class="flex flex-wrap gap-2 justify-center">
+  <button data-cat="short" class="cat-btn px-4 py-2 rounded-xl bg-white/5 border border-white/20 text-white backdrop-blur-sm hover:bg-white/10 transition w-auto sm:w-auto">Short Video</button>
+  <button data-cat="long" class="cat-btn px-4 py-2 rounded-xl bg-white/5 border border-white/20 text-white backdrop-blur-sm hover:bg-white/10 transition w-auto sm:w-auto">Long Video</button>
+  <button data-cat="ads" class="cat-btn px-4 py-2 rounded-xl bg-white/5 border border-white/20 text-white backdrop-blur-sm hover:bg-white/10 transition w-auto sm:w-auto">Advertisement</button>
+  <button data-cat="other" class="cat-btn px-4 py-2 rounded-xl bg-white/5 border border-white/20 text-white backdrop-blur-sm hover:bg-white/10 transition w-auto sm:w-auto">Other</button>
+</div>
+
+        </div>
+
+        <!-- Grid of 4 clickable sections -->
+        
+        <!-- Scrollable video reels with perspective -->
+        <div id="reels" class="mt-12 scroll-3d">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-2xl font-bold"><span id="catTitle">Short Video</span> – Samples</h3>
+            <div class="text-white/60 text-sm">Scroll horizontally</div>
+          </div>
+          <div class="video-track overflow-x-auto snap-x snap-mandatory flex gap-6 pb-6" data-active="short">
+            <!-- Card template repeated -->
+            <div class="tilt-card min-w-[300px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
+              <video class="w-full h-[180px] object-cover" src="https://cdn.coverr.co/videos/coverr-editing-a-video-6615/1080p.mp4" autoplay muted loop playsinline></video>
+              <div class="pt-3">
+                <div class="font-semibold">Fast-paced Reels</div>
+                <div class="text-white/60 text-sm">Hook-first 0:03 intro</div>
+              </div>
+            </div>
+            <div class="tilt-card min-w-[300px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
+              <video class="w-full h-[180px] object-cover" src="https://cdn.coverr.co/videos/coverr-cinematic-drone-shot-9966/1080p.mp4" autoplay muted loop playsinline></video>
+              <div class="pt-3">
+                <div class="font-semibold">Cinematic B-Roll</div>
+                <div class="text-white/60 text-sm">Smooth transitions</div>
+              </div>
+            </div>
+            <div class="tilt-card min-w-[300px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
+              <video class="w-full h-[180px] object-cover" src="https://cdn.coverr.co/videos/coverr-typing-on-a-laptop-6133/1080p.mp4" autoplay muted loop playsinline></video>
+              <div class="pt-3">
+                <div class="font-semibold">Talking Head</div>
+                <div class="text-white/60 text-sm">Captions + zooms</div>
+              </div>
+            </div>
+            <div class="tilt-card min-w-[300px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
+              <video class="w-full h-[180px] object-cover" src="https://cdn.coverr.co/videos/coverr-colorful-smoke-5947/1080p.mp4" autoplay muted loop playsinline></video>
+              <div class="pt-3">
+                <div class="font-semibold">Motion Graphics</div>
+                <div class="text-white/60 text-sm">Title reveal</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT PAGE -->
+    <section id="about" class="py-20">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
+          <div class="order-2 lg:order-1">
+            <h2 class="text-3xl md:text-4xl font-extrabold">About Me</h2>
+            <p class="text-white/70 mt-4 leading-relaxed">I'm a results-focused editor with a creator-first mindset. I blend storytelling, rhythm, and retention tactics to make content that keeps viewers watching and converts browsers into buyers. Tools I love: Premiere Pro, After Effects, DaVinci Resolve, and Audition.</p>
+            <ul class="mt-6 grid grid-cols-2 gap-3 text-sm">
+              <li class="glass rounded-xl px-3 py-2"><i class="fa-solid fa-check text-primary"></i> 5+ years experience</li>
+              <li class="glass rounded-xl px-3 py-2"><i class="fa-solid fa-check text-primary"></i> 300+ projects delivered</li>
+              <li class="glass rounded-xl px-3 py-2"><i class="fa-solid fa-check text-primary"></i> Brand-safe workflow</li>
+              <li class="glass rounded-xl px-3 py-2"><i class="fa-solid fa-check text-primary"></i> Script to final export</li>
+            </ul>
+          </div>
+          <div class="order-1 lg:order-2 relative">
+            <div class="absolute -inset-6 bg-primary/10 blur-2xl rounded-3xl"></div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT PAGE -->
+    <section id="contact" class="py-20">
+      <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-extrabold">Contact</h2>
+        <p class="text-white/70 mt-2">Email and number only, as requested. I typically respond within 24 hours.</p>
+
+        <div class="mt-8 grid gap-4">
+          <div class="glass rounded-2xl p-5 flex items-center justify-between">
+            <div>
+              <div class="text-white/60 text-sm">Email</div>
+              <a href="mailto:" class="font-semibold">email</a>
+            </div>
+            <i class="fa-solid fa-envelope text-white/60"></i>
+          </div>
+          <div class="glass rounded-2xl p-5 flex items-center justify-between">
+            <div>
+              <div class="text-white/60 text-sm">Phone</div>
+              <a href="tel:+91" class="font-semibold">+91 0000000000</a>
+            </div>
+            <i class="fa-solid fa-phone text-white/60"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/10 py-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-3 text-white/60 text-sm">
+      <div>© 2025 Om Admile. All rights reserved.</div>
+      <div class="flex items-center gap-4">
+        <a href="#" class="hover:text-primary">Terms</a>
+        <a href="#" class="hover:text-primary">Privacy</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile menu toggle
+    const mobileBtn = document.getElementById('mobileBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+    // Typing effect
+    const phrases = ['short videos', 'long videos', 'advertisements', 'YouTube edits', 'UGC ads'];
+    const typingEl = document.getElementById('typing');
+    let pi = 0, ci = 0, deleting = false;
+    function typeLoop(){
+      const word = phrases[pi % phrases.length];
+      if(!deleting){
+        typingEl.textContent = word.slice(0, ++ci);
+        if(ci === word.length){ deleting = true; setTimeout(typeLoop, 1000); return; }
+      } else {
+        typingEl.textContent = word.slice(0, --ci);
+        if(ci === 0){ deleting = false; pi++; }
+      }
+      setTimeout(typeLoop, deleting ? 40 : 80);
+    }
+    typeLoop();
+
+    // Category buttons -> switch active dataset
+    const catButtons = document.querySelectorAll('.cat-btn');
+    const catTitle = document.getElementById('catTitle');
+    const track = document.querySelector('.video-track');
+    const catMap = { short: 'Short Video', long: 'Long Video', ads: 'Advertisement', other: 'Other' };
+
+    catButtons.forEach(btn => btn.addEventListener('click', () => {
+      const cat = btn.getAttribute('data-cat');
+      track.setAttribute('data-active', cat);
+      catTitle.textContent = catMap[cat] || 'Short Video';
+      // visual feedback
+      catButtons.forEach(b=>b.classList.remove('ring-2','ring-primary'));
+      btn.classList.add('ring-2','ring-primary');
+    }));
+
+    // Make the four feature cards clickable to switch category
+    document.querySelectorAll('[data-catlink]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const cat = link.getAttribute('data-catlink');
+        e.preventDefault();
+        document.querySelector(`.cat-btn[data-cat="${cat}"]`).click();
+        document.querySelector('#reels').scrollIntoView({behavior:'smooth'});
+      });
+    });
+
+    // Perspective tilt while horizontal scrolling
+    function handleTilt(){
+      const cards = document.querySelectorAll('.tilt-card');
+      const rect = track.getBoundingClientRect();
+      const center = rect.left + rect.width/2;
+      cards.forEach(card => {
+        const r = card.getBoundingClientRect();
+        const distance = (r.left + r.width/2) - center; // -left .. +right
+        const rotateY = Math.max(-20, Math.min(20, -distance / 20));
+        const translateZ = 60 - Math.min(60, Math.abs(distance)/4);
+        card.style.transform = `rotateY(${rotateY}deg) translateZ(${translateZ}px)`;
+        card.style.boxShadow = `0 20px 40px rgba(0,0,0,${0.35 - Math.min(0.25, Math.abs(distance)/800)})`;
+      });
+    }
+    track.addEventListener('scroll', handleTilt, { passive: true });
+    window.addEventListener('resize', handleTilt);
+    window.addEventListener('load', handleTilt);
+  </script>
+</body>
+</html>
