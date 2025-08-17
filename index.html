@@ -97,8 +97,8 @@
         <!-- Socials -->
         <div class="flex items-center gap-3">
           <a class="p-2 rounded-lg hover:bg-white/10 transition" href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a class="p-2 rounded-lg hover:bg-white/10 transition" href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-          <a class="p-2 rounded-lg hover:bg-white/10 transition" href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+<!--           <a class="p-2 rounded-lg hover:bg-white/10 transition" href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a class="p-2 rounded-lg hover:bg-white/10 transition" href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a> -->
           <button id="mobileBtn" class="md:hidden p-2 rounded-lg hover:bg-white/10"><i class="fa-solid fa-bars"></i></button>
         </div>
       </div>
@@ -160,6 +160,10 @@
           <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-scissors"></i> Cuts</span>
           <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles"></i> VFX</span>
           <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-wave-square"></i> Transitions</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-closed-captioning"></i> Subtitles</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-music"></i> Sound Design</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-sliders"></i> Color Grade</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-regular fa-clock"></i> Fast Turnaround</span>
           <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-closed-captioning"></i> Subtitles</span>
           <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-music"></i> Sound Design</span>
           <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-sliders"></i> Color Grade</span>
@@ -295,7 +299,7 @@
     mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
     // Typing effect
-    const phrases = ['short videos', 'long videos', 'advertisements', 'YouTube edits', 'UGC ads'];
+    const phrases = ['short videos', 'long videos', 'advertisements', 'YouTube edits', 'Graphics'];
     const typingEl = document.getElementById('typing');
     let pi = 0, ci = 0, deleting = false;
     function typeLoop(){
@@ -356,5 +360,6 @@
   </script>
 </body>
 </html>
+
 
 
