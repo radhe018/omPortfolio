@@ -173,64 +173,81 @@
     </section>
 
     <!-- SERVICES / SECOND PAGE -->
-    <section id="services" class="py-20">
-      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex items-end justify-between gap-6 flex-wrap">
-          <div>
-            <h2 class="text-3xl md:text-4xl font-extrabold">Services</h2>
-            <p class="text-white/70 mt-2">Click a category and browse sample reels. Cards tilt as you scroll (3D perspective).</p>
-          </div>
-          <div class="flex flex-wrap gap-2 justify-center">
-  <button data-cat="short" class="cat-btn px-4 py-2 rounded-xl bg-white/5 border border-white/20 text-white backdrop-blur-sm hover:bg-white/10 transition w-auto sm:w-auto">Short Video</button>
-  <button data-cat="long" class="cat-btn px-4 py-2 rounded-xl bg-white/5 border border-white/20 text-white backdrop-blur-sm hover:bg-white/10 transition w-auto sm:w-auto">Long Video</button>
-  <button data-cat="ads" class="cat-btn px-4 py-2 rounded-xl bg-white/5 border border-white/20 text-white backdrop-blur-sm hover:bg-white/10 transition w-auto sm:w-auto">Advertisement</button>
-  <button data-cat="other" class="cat-btn px-4 py-2 rounded-xl bg-white/5 border border-white/20 text-white backdrop-blur-sm hover:bg-white/10 transition w-auto sm:w-auto">Other</button>
-</div>
+   <section id="services" class="py-20">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex items-end justify-between gap-6 flex-wrap">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-extrabold">Services</h2>
+        <p class="text-white/70 mt-2">Click a category and browse sample reels. Cards tilt as you scroll (3D perspective).</p>
+      </div>
+      <div class="flex flex-wrap gap-2 justify-center">
+        <button data-cat="short" class="cat-btn px-4 py-2 rounded-xl bg-white/10 text-white border border-white/20">Short Video</button>
+        <button data-cat="long" class="cat-btn px-4 py-2 rounded-xl bg-white/5 text-white border border-white/20">Long Video</button>
+        <button data-cat="ads" class="cat-btn px-4 py-2 rounded-xl bg-white/5 text-white border border-white/20">Advertisement</button>
+        <button data-cat="other" class="cat-btn px-4 py-2 rounded-xl bg-white/5 text-white border border-white/20">Other</button>
+      </div>
+    </div>
 
+    <!-- Scrollable video reels -->
+    <div id="reels" class="mt-12 scroll-3d">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-2xl font-bold"><span id="catTitle">Short Video</span> – Samples</h3>
+        <div class="text-white/60 text-sm">Scroll horizontally</div>
+      </div>
+
+      <!-- Short Videos -->
+      <div class="video-track flex gap-6 pb-6 overflow-x-auto snap-x snap-mandatory" data-cat="short">
+        <div class="tilt-card min-w-[300px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
+          <video class="w-full h-[180px] object-contain cursor-pointer" src="video1.mp4" autoplay muted loop playsinline></video>
+          <div class="pt-3">
+            <div class="font-semibold">Fast-paced Reels</div>
+            <div class="text-white/60 text-sm">Hook-first 0:03 intro</div>
+          </div>
         </div>
-
-        <!-- Grid of 4 clickable sections -->
-        
-        <!-- Scrollable video reels with perspective -->
-        <div id="reels" class="mt-12 scroll-3d">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-2xl font-bold"><span id="catTitle">Short Video</span> – Samples</h3>
-            <div class="text-white/60 text-sm">Scroll horizontally</div>
-          </div>
-          <div class="video-track overflow-x-auto snap-x snap-mandatory flex gap-6 pb-6" data-active="short">
-            <!-- Card template repeated -->
-            <div class="tilt-card min-w-[300px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
-              <video class="w-full h-[180px] object-cover" src="video1.mp4" autoplay muted loop playsinline></video>
-              <div class="pt-3">
-                <div class="font-semibold">Fast-paced Reels</div>
-                <div class="text-white/60 text-sm">Hook-first 0:03 intro</div>
-              </div>
-            </div>
-            <div class="tilt-card min-w-[300px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
-              <video class="w-full h-[180px] object-cover" src="https://jumpshare.com/s/YHhvVt62RABCyJzC0McL" autoplay muted loop playsinline></video>
-              <div class="pt-3">
-                <div class="font-semibold">Cinematic B-Roll</div>
-                <div class="text-white/60 text-sm">Smooth transitions</div>
-              </div>
-            </div>
-            <div class="tilt-card min-w-[300px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
-              <video class="w-full h-[180px] object-cover" src="https://cdn.coverr.co/videos/coverr-typing-on-a-laptop-6133/1080p.mp4" autoplay muted loop playsinline></video>
-              <div class="pt-3">
-                <div class="font-semibold">Talking Head</div>
-                <div class="text-white/60 text-sm">Captions + zooms</div>
-              </div>
-            </div>
-            <div class="tilt-card min-w-[300px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
-              <video class="w-full h-[180px] object-cover" src="https://cdn.coverr.co/videos/coverr-colorful-smoke-5947/1080p.mp4" autoplay muted loop playsinline></video>
-              <div class="pt-3">
-                <div class="font-semibold">Motion Graphics</div>
-                <div class="text-white/60 text-sm">Title reveal</div>
-              </div>
-            </div>
+        <div class="tilt-card min-w-[300px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
+          <video class="w-full h-[180px] object-contain cursor-pointer" src="https://cdn.coverr.co/videos/coverr-typing-on-a-laptop-6133/1080p.mp4" autoplay muted loop playsinline></video>
+          <div class="pt-3">
+            <div class="font-semibold">Talking Head</div>
+            <div class="text-white/60 text-sm">Captions + zooms</div>
           </div>
         </div>
       </div>
-    </section>
+
+      <!-- Long Videos -->
+      <div class="video-track flex gap-6 pb-6 overflow-x-auto snap-x snap-mandatory hidden" data-cat="long">
+        <div class="tilt-card min-w-[300px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
+          <video class="w-full h-[180px] object-contain cursor-pointer" src="https://cdn.coverr.co/videos/coverr-colorful-smoke-5947/1080p.mp4" autoplay muted loop playsinline></video>
+          <div class="pt-3">
+            <div class="font-semibold">Documentary Style</div>
+            <div class="text-white/60 text-sm">Smooth cinematic shots</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ads -->
+      <div class="video-track flex gap-6 pb-6 overflow-x-auto snap-x snap-mandatory hidden" data-cat="ads">
+        <div class="tilt-card min-w-[300px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
+          <video class="w-full h-[180px] object-contain cursor-pointer" src="https://cdn.coverr.co/videos/coverr-typing-on-a-laptop-6133/1080p.mp4" autoplay muted loop playsinline></video>
+          <div class="pt-3">
+            <div class="font-semibold">Product Ad</div>
+            <div class="text-white/60 text-sm">Highlighting features</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Other -->
+      <div class="video-track flex gap-6 pb-6 overflow-x-auto snap-x snap-mandatory hidden" data-cat="other">
+        <div class="tilt-card min-w-[300px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
+          <video class="w-full h-[180px] object-contain cursor-pointer" src="https://cdn.coverr.co/videos/coverr-colorful-smoke-5947/1080p.mp4" autoplay muted loop playsinline></video>
+          <div class="pt-3">
+            <div class="font-semibold">Miscellaneous</div>
+            <div class="text-white/60 text-sm">Creative experiments</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
     <!-- ABOUT PAGE -->
     <section id="about" class="py-20">
@@ -357,9 +374,49 @@
     track.addEventListener('scroll', handleTilt, { passive: true });
     window.addEventListener('resize', handleTilt);
     window.addEventListener('load', handleTilt);
+
+    // try
+    // Switch category
+const buttons = document.querySelectorAll(".cat-btn");
+const tracks = document.querySelectorAll(".video-track");
+const title = document.getElementById("catTitle");
+
+buttons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const cat = btn.getAttribute("data-cat");
+    title.textContent = btn.textContent;
+
+    // Toggle active button styles
+    buttons.forEach(b => b.classList.remove("bg-white/10"));
+    btn.classList.add("bg-white/10");
+
+    // Show/hide video sections
+    tracks.forEach(track => {
+      if (track.getAttribute("data-cat") === cat) {
+        track.classList.remove("hidden");
+      } else {
+        track.classList.add("hidden");
+      }
+    });
+  });
+});
+
+// Video fullscreen on click
+document.querySelectorAll("video").forEach(video => {
+  video.addEventListener("click", () => {
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.webkitRequestFullscreen) { // Safari
+      video.webkitRequestFullscreen();
+    } else if (video.msRequestFullscreen) { // IE/Edge
+      video.msRequestFullscreen();
+    }
+  });
+});
   </script>
 </body>
 </html>
+
 
 
 
