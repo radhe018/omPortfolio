@@ -358,22 +358,22 @@
     });
 
     // Perspective tilt while horizontal scrolling
-    function handleTilt(){
-      const cards = document.querySelectorAll('.tilt-card');
-      const rect = track.getBoundingClientRect();
-      const center = rect.left + rect.width/2;
-      cards.forEach(card => {
-        const r = card.getBoundingClientRect();
-        const distance = (r.left + r.width/2) - center; // -left .. +right
-        const rotateY = Math.max(-20, Math.min(20, -distance / 20));
-        const translateZ = 60 - Math.min(60, Math.abs(distance)/4);
-        card.style.transform = `rotateY(${rotateY}deg) translateZ(${translateZ}px)`;
-        card.style.boxShadow = `0 20px 40px rgba(0,0,0,${0.35 - Math.min(0.25, Math.abs(distance)/800)})`;
-      });
-    }
-    track.addEventListener('scroll', handleTilt, { passive: true });
-    window.addEventListener('resize', handleTilt);
-    window.addEventListener('load', handleTilt);
+    // function handleTilt(){
+    //   const cards = document.querySelectorAll('.tilt-card');
+    //   const rect = track.getBoundingClientRect();
+    //   const center = rect.left + rect.width/2;
+    //   cards.forEach(card => {
+    //     const r = card.getBoundingClientRect();
+    //     const distance = (r.left + r.width/2) - center; // -left .. +right
+    //     const rotateY = Math.max(-20, Math.min(20, -distance / 20));
+    //     const translateZ = 60 - Math.min(60, Math.abs(distance)/4);
+    //     card.style.transform = `rotateY(${rotateY}deg) translateZ(${translateZ}px)`;
+    //     card.style.boxShadow = `0 20px 40px rgba(0,0,0,${0.35 - Math.min(0.25, Math.abs(distance)/800)})`;
+    //   });
+    // }
+    // track.addEventListener('scroll', handleTilt, { passive: true });
+    // window.addEventListener('resize', handleTilt);
+    // window.addEventListener('load', handleTilt);
 
     // try
     // Switch category
@@ -416,6 +416,7 @@ document.querySelectorAll("video").forEach(video => {
   </script>
 </body>
 </html>
+
 
 
 
