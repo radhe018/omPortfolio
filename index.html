@@ -68,6 +68,14 @@
     .sticky-blur { backdrop-filter: blur(10px); background: rgba(18,18,27,0.65); }
     .glass { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); }
     .badge { border:1px solid rgba(255,255,255,0.1); }
+    .tilt-card {
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .tilt-card:hover {
+    transform: perspective(1000px) rotateY(6deg) scale(1.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
   </style>
 </head>
 <body class="neon-bg text-white">
@@ -219,47 +227,64 @@
       </div>
 
       <!-- Long Videos -->
-      <div class="video-track flex gap-6 pb-6 overflow-x-auto snap-x snap-mandatory hidden" data-cat="long">
-        <div class="tilt-card min-w-[585px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
-          <iframe width="560" height="315" 
-    src="https://www.youtube.com/embed/QlUe_6u3qrI?autoplay=1&mute=1&loop=1&rel=0&modestbranding=1&showinfo=0&controls=1"
-    title="YouTube video player" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen>
-</iframe>
-          <div class="pt-3">
-            <div class="font-semibold">Documentary Style</div>
-            <div class="text-white/60 text-sm">Smooth cinematic shots</div>
-          </div>
-        </div>
- <div class="tilt-card min-w-[585px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
-          <iframe width="560" height="315" 
-    src="https://www.youtube.com/embed/QlUe_6u3qrI?autoplay=1&mute=1&loop=1&rel=0&modestbranding=1&showinfo=0&controls=1"
-    title="YouTube video player" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen>
-</iframe>
-          <div class="pt-3">
-            <div class="font-semibold">Documentary Style</div>
-            <div class="text-white/60 text-sm">Smooth cinematic shots</div>
-          </div>
-        </div>
-              <div class="tilt-card min-w-[585px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
-          <iframe width="560" height="315" 
-    src="https://www.youtube.com/embed/k1w92tjg04U?autoplay=1&mute=1&loop=1&rel=0&modestbranding=1&showinfo=0&controls=1" 
-    title="YouTube video player" 
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen>
-</iframe>
-          <div class="pt-3">
-            <div class="font-semibold">Documentary Style</div>
-            <div class="text-white/60 text-sm">Smooth cinematic shots</div>
-          </div>
-        </div>
+      <div class="relative">
+  <!-- Prev Button -->
+  <button id="prevBtn" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 px-3 py-2 rounded-full text-white z-10 hidden sm:hidden md:block">
+    ‹
+  </button>
+
+  <!-- Next Button -->
+  <button id="nextBtn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 px-3 py-2 rounded-full text-white z-10 hidden sm:hidden md:block">
+    ›
+  </button>
+
+  <div class="video-track flex gap-6 pb-6 overflow-hidden snap-x snap-mandatory" data-cat="long">
+
+    <div class="tilt-card min-w-full sm:min-w-[32%] snap-start rounded-2xl p-3 glass border border-white/10 transition-transform duration-500">
+      <iframe width="100%" height="315"
+        src="https://www.youtube.com/embed/QlUe_6u3qrI?autoplay=1&mute=1&loop=1&rel=0&modestbranding=1&showinfo=0&controls=1"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+      <div class="pt-3">
+        <div class="font-semibold">Documentary Style</div>
+        <div class="text-white/60 text-sm">Smooth cinematic shots</div>
       </div>
+    </div>
+
+    <div class="tilt-card min-w-full sm:min-w-[32%] snap-start rounded-2xl p-3 glass border border-white/10 transition-transform duration-500">
+      <iframe width="100%" height="315"
+        src="https://www.youtube.com/embed/QlUe_6u3qrI?autoplay=1&mute=1&loop=1&rel=0&modestbranding=1&showinfo=0&controls=1"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+      <div class="pt-3">
+        <div class="font-semibold">Documentary Style</div>
+        <div class="text-white/60 text-sm">Smooth cinematic shots</div>
+      </div>
+    </div>
+
+    <div class="tilt-card min-w-full sm:min-w-[32%] snap-start rounded-2xl p-3 glass border border-white/10 transition-transform duration-500">
+      <iframe width="100%" height="315"
+        src="https://www.youtube.com/embed/k1w92tjg04U?autoplay=1&mute=1&loop=1&rel=0&modestbranding=1&showinfo=0&controls=1"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+      <div class="pt-3">
+        <div class="font-semibold">Documentary Style</div>
+        <div class="text-white/60 text-sm">Smooth cinematic shots</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
       <!-- Ads -->
       <div class="video-track flex gap-6 pb-6 overflow-x-auto snap-x snap-mandatory hidden" data-cat="ads">
@@ -450,9 +475,47 @@ document.querySelectorAll("video").forEach(video => {
     }
   });
 });
+    // Pratham 
+    const track = document.querySelector('.video-track');
+  const videos = document.querySelectorAll('.tilt-card');
+  let current = 0;
+
+  const nextBtn = document.getElementById('nextBtn');
+  const prevBtn = document.getElementById('prevBtn');
+
+  function updateSlider() {
+    track.style.transform = `translateX(-${current * 100}%)`;
+  }
+
+  nextBtn.addEventListener('click', () => {
+    current = (current + 1) % videos.length;
+    updateSlider();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    current = (current - 1 + videos.length) % videos.length;
+    updateSlider();
+  });
+
+  // Hide buttons on desktop
+  function handleResize() {
+    if (window.innerWidth < 768) {
+      nextBtn.classList.remove('hidden');
+      prevBtn.classList.remove('hidden');
+    } else {
+      nextBtn.classList.add('hidden');
+      prevBtn.classList.add('hidden');
+      track.style.transform = 'translateX(0)';
+      current = 0;
+    }
+  }
+
+  window.addEventListener('resize', handleResize);
+  handleResize();
   </script>
 </body>
 </html>
+
 
 
 
