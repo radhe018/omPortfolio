@@ -476,42 +476,7 @@ document.querySelectorAll("video").forEach(video => {
   });
 });
     // Pratham 
-    const track = document.querySelector('.video-track');
-  const videos = document.querySelectorAll('.tilt-card');
-  let current = 0;
-
-  const nextBtn = document.getElementById('nextBtn');
-  const prevBtn = document.getElementById('prevBtn');
-
-  function updateSlider() {
-    track.style.transform = `translateX(-${current * 100}%)`;
-  }
-
-  nextBtn.addEventListener('click', () => {
-    current = (current + 1) % videos.length;
-    updateSlider();
-  });
-
-  prevBtn.addEventListener('click', () => {
-    current = (current - 1 + videos.length) % videos.length;
-    updateSlider();
-  });
-
-  // Hide buttons on desktop
-  function handleResize() {
-    if (window.innerWidth < 768) {
-      nextBtn.classList.remove('hidden');
-      prevBtn.classList.remove('hidden');
-    } else {
-      nextBtn.classList.add('hidden');
-      prevBtn.classList.add('hidden');
-      track.style.transform = 'translateX(0)';
-      current = 0;
-    }
-  }
-
-  window.addEventListener('resize', handleResize);
-  handleResize();
+   
   </script>
 </body>
 </html>
