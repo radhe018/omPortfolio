@@ -76,6 +76,27 @@
     transform: perspective(1000px) rotateY(6deg) scale(1.03);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   }
+
+  /* Custom CSS for Active Button State (Can be in your main stylesheet) */
+.cat-btn.active {
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly stronger background */
+    border-color: rgba(255, 255, 255, 0.5); /* Stronger border */
+}
+
+/* Glass effect for the cards (based on your original HTML) */
+.glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+}
+
+/* Hide scrollbar but allow scrolling on desktop/touch devices */
+.video-track::-webkit-scrollbar {
+    display: none;
+}
+.video-track {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
   </style>
 </head>
 <body class="neon-bg text-white">
@@ -177,135 +198,284 @@
           <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-music"></i> Sound Design</span>
           <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-sliders"></i> Color Grade</span>
           <span class="mx-6 inline-flex items-center gap-2"><i class="fa-regular fa-clock"></i> Fast Turnaround</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-scissors"></i> Cuts</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles"></i> VFX</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-wave-square"></i> Transitions</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-closed-captioning"></i> Subtitles</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-music"></i> Sound Design</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-sliders"></i> Color Grade</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-regular fa-clock"></i> Fast Turnaround</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-closed-captioning"></i> Subtitles</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-music"></i> Sound Design</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-solid fa-sliders"></i> Color Grade</span>
+          <span class="mx-6 inline-flex items-center gap-2"><i class="fa-regular fa-clock"></i> Fast Turnaround</span>
         </div>
       </div>
     </section>
 
     <!-- SERVICES / SECOND PAGE -->
-   <section id="services" class="py-20">
+   <section id="services" class="py-20 bg-gray-900 text-white">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="flex items-end justify-between gap-6 flex-wrap">
       <div>
-        <h2 class="text-3xl md:text-4xl font-extrabold">Services</h2>
-        <p class="text-white/70 mt-2">Click a category and browse sample reels. Cards tilt as you scroll (3D perspective).</p>
+        <h2 class="text-3xl md:text-4xl font-extrabold">Our Services</h2>
+        <p class="text-white/70 mt-2">Click a category and browse our professional sample reels. Cards tilt as you scroll.</p>
       </div>
-      <div class="flex flex-wrap gap-2 justify-center">
-        <button data-cat="short" class="cat-btn px-4 py-2 rounded-xl bg-white/10 text-white border border-white/20">Short Video</button>
-        <button data-cat="long" class="cat-btn px-4 py-2 rounded-xl bg-white/5 text-white border border-white/20">Long Video</button>
-        <button data-cat="ads" class="cat-btn px-4 py-2 rounded-xl bg-white/5 text-white border border-white/20">Advertisement</button>
-        <button data-cat="other" class="cat-btn px-4 py-2 rounded-xl bg-white/5 text-white border border-white/20">Graphics</button>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <button data-cat="long" class="cat-btn px-4 py-2 rounded-xl bg-white/5 text-white border border-white/20 transition duration-300 hover:bg-white/20 hover:border-white/40">Long Video</button>
+        <button data-cat="short" class="cat-btn px-4 py-2 rounded-xl bg-white/10 text-white border border-white/20 active transition duration-300 hover:bg-white/20 hover:border-white/40">Short Video</button>
+        <button data-cat="ads" class="cat-btn px-4 py-2 rounded-xl bg-white/5 text-white border border-white/20 transition duration-300 hover:bg-white/20 hover:border-white/40">Advertisement</button>
+        <button data-cat="other" class="cat-btn px-4 py-2 rounded-xl bg-white/5 text-white border border-white/20 transition duration-300 hover:bg-white/20 hover:border-white/40">Graphics</button>
       </div>
     </div>
 
-    <!-- Scrollable video reels -->
-    <div id="reels" class="mt-12 scroll-3d">
+    <div id="reels-container" class="mt-12 relative">
       <div class="flex items-center justify-between mb-4">
-        <h3 class="text-2xl font-bold"><span id="catTitle">Short Video</span> – Samples</h3>
-        <div class="text-white/60 text-sm">Scroll horizontally</div>
+        <h3 class="text-2xl font-bold"><span id="catTitle">Long Video</span> – Samples</h3>
+        <div class="text-white/60 text-sm hidden sm:block">Use arrow buttons or scroll horizontally</div>
       </div>
 
-      <!-- Short Videos -->
-      <div class="video-track flex gap-6 pb-6 overflow-x-auto snap-x snap-mandatory" data-cat="short">
-        <div class="tilt-card min-w-[300px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
-          <lite-youtube
-  videoid="k1w92tjg04U"
-  params="autoplay=1&mute=1&loop=1&playlist=dQw4w9WgXcQ&controls=0&modestbranding=1&rel=0&showinfo=0"
-  style="width:100%;height:450px;">
-</lite-youtube>
-          <div class="pt-3">
-            <div class="font-semibold">Fast-paced Reels</div>
-            <div class="text-white/60 text-sm">Hook-first 0:03 intro</div>
+      <button id="prevBtn" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/30 p-3 rounded-full text-white z-10 transition duration-300 hidden md:block opacity-50 disabled:opacity-30 disabled:cursor-not-allowed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+      </button>
+
+      <button id="nextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/30 p-3 rounded-full text-white z-10 transition duration-300 hidden md:block opacity-100 disabled:opacity-30 disabled:cursor-not-allowed">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+      </button>
+
+      <div id="video-tracks-wrapper" class="overflow-hidden">
+        
+       
+
+        <div id="long-track" class="video-track flex gap-6 pb-6 overflow-x-scroll snap-x snap-mandatory scroll-smooth" data-cat="long" style="display: flex;">
+          <div class="tilt-card min-w-full sm:min-w-[45%] lg:min-w-[30%] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-blue-500/50 transition duration-500">
+            <div class="aspect-video w-full">
+              <iframe width="100%" height="100%"
+                src="https://www.youtube.com/embed/QlUe_6u3qrI?autoplay=1&mute=1&loop=1&rel=0&modestbranding=1&showinfo=0&controls=1"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                class="rounded-xl">
+              </iframe>
+            </div>
+            <div class="pt-3">
+              <div class="font-semibold">Documentary Style</div>
+              <div class="text-white/60 text-sm">Smooth cinematic shots</div>
+            </div>
+          </div>
+
+          <div class="tilt-card min-w-full sm:min-w-[45%] lg:min-w-[30%] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-blue-500/50 transition duration-500">
+            <div class="aspect-video w-full">
+              <iframe width="100%" height="100%"
+                src="https://www.youtube.com/embed/S_x2c4nC8nE?autoplay=1&mute=1&loop=1&rel=0&modestbranding=1&showinfo=0&controls=1"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                class="rounded-xl">
+              </iframe>
+            </div>
+            <div class="pt-3">
+              <div class="font-semibold">Corporate Explainer</div>
+              <div class="text-white/60 text-sm">B-roll and voiceover</div>
+            </div>
+          </div>
+
+          <div class="tilt-card min-w-full sm:min-w-[45%] lg:min-w-[30%] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-blue-500/50 transition duration-500">
+            <div class="aspect-video w-full">
+              <iframe width="100%" height="100%"
+                src="https://www.youtube.com/embed/3e68q_4e9j4?autoplay=1&mute=1&loop=1&rel=0&modestbranding=1&showinfo=0&controls=1"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                class="rounded-xl">
+              </iframe>
+            </div>
+            <div class="pt-3">
+              <div class="font-semibold">Product Review</div>
+              <div class="text-white/60 text-sm">Unboxing and tests</div>
+            </div>
           </div>
         </div>
-        <div class="tilt-card min-w-[300px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
-          <video class="w-full h-[180px] object-contain cursor-pointer" src="https://cdn.coverr.co/videos/coverr-typing-on-a-laptop-6133/1080p.mp4" autoplay muted loop playsinline></video>
-          <div class="pt-3">
-            <div class="font-semibold">Talking Head</div>
-            <div class="text-white/60 text-sm">Captions + zooms</div>
+
+         <div id="short-track" class="video-track flex gap-6 pb-6 overflow-x-scroll snap-x snap-mandatory scroll-smooth" data-cat="short" style="display: none;">
+          <div class="tilt-card min-w-[280px] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-red-500/50 transition duration-500">
+            <div class="aspect-[9/16] w-full">
+              <lite-youtube videoid="k1w92tjg04U" params="autoplay=1&mute=1&loop=1&playlist=k1w92tjg04U&controls=0&modestbranding=1&rel=0&showinfo=0" class="w-full h-full rounded-xl overflow-hidden"></lite-youtube>
+            </div>
+            <div class="pt-3">
+              <div class="font-semibold">Fast-paced Reels</div>
+              <div class="text-white/60 text-sm">Hook-first 0:03 intro</div>
+            </div>
+          </div>
+          <div class="tilt-card min-w-[280px] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-red-500/50 transition duration-500">
+            <div class="aspect-[9/16] w-full">
+              <video class="w-full h-full object-cover cursor-pointer rounded-xl" src="https://cdn.coverr.co/videos/coverr-typing-on-a-laptop-6133/1080p.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="pt-3">
+              <div class="font-semibold">Talking Head</div>
+              <div class="text-white/60 text-sm">Captions + zooms</div>
+            </div>
+          </div>
+          <div class="tilt-card min-w-[280px] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-red-500/50 transition duration-500">
+            <div class="aspect-[9/16] w-full">
+              <video class="w-full h-full object-cover cursor-pointer rounded-xl" src="https://cdn.coverr.co/videos/coverr-typing-on-a-laptop-6133/1080p.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="pt-3">
+              <div class="font-semibold">Test Short Video 3</div>
+              <div class="text-white/60 text-sm">Sample description</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Long Videos -->
-      <div class="relative">
-  <!-- Prev Button -->
-  <button id="prevBtn" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 px-3 py-2 rounded-full text-white z-10 hidden sm:hidden md:block">
-    ‹
-  </button>
+        <div id="ads-track" class="video-track flex gap-6 pb-6 overflow-x-scroll snap-x snap-mandatory scroll-smooth" data-cat="ads" style="display: none;">
+            <div class="tilt-card min-w-full sm:min-w-[45%] lg:min-w-[30%] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-blue-500/50 transition duration-500">
+            <div class="aspect-video w-full">
+              <video class="w-full h-full object-cover cursor-pointer rounded-xl" src="https://cdn.coverr.co/videos/coverr-typing-on-a-laptop-6133/1080p.mp4" autoplay muted loop playsinline></video>
+            </div>
+            <div class="pt-3">
+              <div class="font-semibold">Product Ad (Vertical)</div>
+              <div class="text-white/60 text-sm">Highlighting features</div>
+            </div>
+          </div>
+        </div>
 
-  <!-- Next Button -->
-  <button id="nextBtn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 px-3 py-2 rounded-full text-white z-10 hidden sm:hidden md:block">
-    ›
-  </button>
-
-  <div class="video-track flex gap-6 pb-6 overflow-hidden snap-x snap-mandatory" data-cat="long">
-
-    <div class="tilt-card min-w-full sm:min-w-[32%] snap-start rounded-2xl p-3 glass border border-white/10 transition-transform duration-500">
-      <iframe width="100%" height="315"
-        src="https://www.youtube.com/embed/QlUe_6u3qrI?autoplay=1&mute=1&loop=1&rel=0&modestbranding=1&showinfo=0&controls=1"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-      <div class="pt-3">
-        <div class="font-semibold">Documentary Style</div>
-        <div class="text-white/60 text-sm">Smooth cinematic shots</div>
-      </div>
+        <div id="other-track" class="video-track flex gap-6 pb-6 overflow-x-scroll snap-x snap-mandatory scroll-smooth" data-cat="other" style="display: none;">
+    <div class="tilt-card min-w-full sm:min-w-[45%] lg:min-w-[30%] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-purple-500/50 transition duration-500">
+        <div class="aspect-[4/3] w-full">
+            <img src="gimg1.png" alt="Logo Design" data-title="Modern Logo and Branding Mockup" class="w-full h-full object-cover rounded-xl cursor-pointer modal-trigger">
+        </div>
+        <div class="pt-3">
+            <div class="font-semibold">Logo/Branding Mockup</div>
+            <div class="text-white/60 text-sm">Static graphics and UI design</div>
+        </div>
+    </div>
+    
+    <div class="tilt-card min-w-full sm:min-w-[45%] lg:min-w-[30%] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-purple-500/50 transition duration-500">
+        <div class="aspect-[4/3] w-full">
+            <img src="gimg2.png" alt="Infographic" data-title="Annual Sales Growth Infographic" class="w-full h-full object-cover rounded-xl cursor-pointer modal-trigger">
+        </div>
+        <div class="pt-3">
+            <div class="font-semibold">Infographics</div>
+            <div class="text-white/60 text-sm">Data visualization for reports</div>
+        </div>
     </div>
 
-    <div class="tilt-card min-w-full sm:min-w-[32%] snap-start rounded-2xl p-3 glass border border-white/10 transition-transform duration-500">
-      <iframe width="100%" height="315"
-        src="https://www.youtube.com/embed/QlUe_6u3qrI?autoplay=1&mute=1&loop=1&rel=0&modestbranding=1&showinfo=0&controls=1"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-      <div class="pt-3">
-        <div class="font-semibold">Documentary Style</div>
-        <div class="text-white/60 text-sm">Smooth cinematic shots</div>
-      </div>
+    <div class="tilt-card min-w-full sm:min-w-[45%] lg:min-w-[30%] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-purple-500/50 transition duration-500">
+        <div class="aspect-[4/3] w-full">
+            <img src="gimg3.png" alt="Product Features" data-title="Software Feature Breakdown Infographic" class="w-full h-full object-cover rounded-xl cursor-pointer modal-trigger">
+        </div>
+        <div class="pt-3">
+            <div class="font-semibold">Infographics</div>
+            <div class="text-white/60 text-sm">Product features and flow</div>
+        </div>
     </div>
 
-    <div class="tilt-card min-w-full sm:min-w-[32%] snap-start rounded-2xl p-3 glass border border-white/10 transition-transform duration-500">
-      <iframe width="100%" height="315"
-        src="https://www.youtube.com/embed/k1w92tjg04U?autoplay=1&mute=1&loop=1&rel=0&modestbranding=1&showinfo=0&controls=1"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-      <div class="pt-3">
-        <div class="font-semibold">Documentary Style</div>
-        <div class="text-white/60 text-sm">Smooth cinematic shots</div>
-      </div>
+    <div class="tilt-card min-w-full sm:min-w-[45%] lg:min-w-[30%] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-purple-500/50 transition duration-500">
+        <div class="aspect-[4/3] w-full">
+            <img src="gimg4.png" alt="Social Media Graphic" data-title="Abstract Social Media Post Design" class="w-full h-full object-cover rounded-xl cursor-pointer modal-trigger">
+        </div>
+        <div class="pt-3">
+            <div class="font-semibold">Social Graphics</div>
+            <div class="text-white/60 text-sm">Creative experiments</div>
+        </div>
+    </div>
+    
+    <div class="tilt-card min-w-full sm:min-w-[45%] lg:min-w-[30%] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-purple-500/50 transition duration-500">
+        <div class="aspect-[4/3] w-full">
+            <img src="gimg5.png" alt="Website Mockup" data-title="SaaS Landing Page UI Mockup" class="w-full h-full object-cover rounded-xl cursor-pointer modal-trigger">
+        </div>
+        <div class="pt-3">
+            <div class="font-semibold">UI/UX Design</div>
+            <div class="text-white/60 text-sm">Website and app interfaces</div>
+        </div>
     </div>
 
-  </div>
+    <div class="tilt-card min-w-full sm:min-w-[45%] lg:min-w-[30%] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-purple-500/50 transition duration-500">
+        <div class="aspect-[4/3] w-full">
+            <img src="gimg6.png" alt="Infographic" data-title="Timeline Infographic Example" class="w-full h-full object-cover rounded-xl cursor-pointer modal-trigger">
+        </div>
+        <div class="pt-3">
+            <div class="font-semibold">Infographics</div>
+            <div class="text-white/60 text-sm">Timeline Visualization</div>
+        </div>
+    </div>
+
+    <div class="tilt-card min-w-full sm:min-w-[45%] lg:min-w-[30%] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-purple-500/50 transition duration-500">
+        <div class="aspect-[4/3] w-full">
+            <img src="gimg7.png" alt="Infographic" data-title="Process Flow Diagram" class="w-full h-full object-cover rounded-xl cursor-pointer modal-trigger">
+        </div>
+        <div class="pt-3">
+            <div class="font-semibold">Flowchart</div>
+            <div class="text-white/60 text-sm">Business process mapping</div>
+        </div>
+    </div>
+
+    <div class="tilt-card min-w-full sm:min-w-[45%] lg:min-w-[30%] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-purple-500/50 transition duration-500">
+        <div class="aspect-[4/3] w-full">
+            <img src="gimg8.png" alt="Infographic" data-title="Creative E-book Cover Design" class="w-full h-full object-cover rounded-xl cursor-pointer modal-trigger">
+        </div>
+        <div class="pt-3">
+            <div class="font-semibold">E-book Cover</div>
+            <div class="text-white/60 text-sm">Digital book design</div>
+        </div>
+    </div>
+    
+    <div class="tilt-card min-w-full sm:min-w-[45%] lg:min-w-[30%] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-purple-500/50 transition duration-500">
+        <div class="aspect-[4/3] w-full">
+            <img src="gimg9.png" alt="Infographic" data-title="Marketing Campaign Graphic" class="w-full h-full object-cover rounded-xl cursor-pointer modal-trigger">
+        </div>
+        <div class="pt-3">
+            <div class="font-semibold">Marketing Graphics</div>
+            <div class="text-white/60 text-sm">Campaign visuals</div>
+        </div>
+    </div>
+    <div class="tilt-card min-w-full sm:min-w-[45%] lg:min-w-[30%] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-purple-500/50 transition duration-500">
+        <div class="aspect-[4/3] w-full">
+            <img src="gimg10.png" alt="Infographic" data-title="Abstract Poster Design" class="w-full h-full object-cover rounded-xl cursor-pointer modal-trigger">
+        </div>
+        <div class="pt-3">
+            <div class="font-semibold">Poster Design</div>
+            <div class="text-white/60 text-sm">Large format graphics</div>
+        </div>
+    </div>
+    <div class="tilt-card min-w-full sm:min-w-[45%] lg:min-w-[30%] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-purple-500/50 transition duration-500">
+        <div class="aspect-[4/3] w-full">
+            <img src="gimg11.png" alt="Infographic" data-title="Vector Illustration Sample" class="w-full h-full object-cover rounded-xl cursor-pointer modal-trigger">
+        </div>
+        <div class="pt-3">
+            <div class="font-semibold">Vector Art</div>
+            <div class="text-white/60 text-sm">Custom illustrations</div>
+        </div>
+    </div>
+    <div class="tilt-card min-w-full sm:min-w-[45%] lg:min-w-[30%] snap-start rounded-2xl p-3 glass border border-white/10 hover:shadow-2xl hover:shadow-purple-500/50 transition duration-500">
+        <div class="aspect-[4/3] w-full">
+            <img src="gimg12.png" alt="Infographic" data-title="Icon Set Design Example" class="w-full h-full object-cover rounded-xl cursor-pointer modal-trigger">
+        </div>
+        <div class="pt-3">
+            <div class="font-semibold">Iconography</div>
+            <div class="text-white/60 text-sm">Custom icon packs</div>
+        </div>
+    </div>
 </div>
 
-
-      <!-- Ads -->
-      <div class="video-track flex gap-6 pb-6 overflow-x-auto snap-x snap-mandatory hidden" data-cat="ads">
-        <div class="tilt-card min-w-[300px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
-          <video class="w-full h-[180px] object-contain cursor-pointer" src="https://cdn.coverr.co/videos/coverr-typing-on-a-laptop-6133/1080p.mp4" autoplay muted loop playsinline></video>
-          <div class="pt-3">
-            <div class="font-semibold">Product Ad</div>
-            <div class="text-white/60 text-sm">Highlighting features</div>
-          </div>
+<div id="imageModal" class="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none">
+    <div class="relative max-w-7xl w-full max-h-full">
+        <button id="closeModal" class="absolute top-4 right-4 text-white hover:text-red-500 transition-colors z-20 text-4xl p-2 focus:outline-none">
+            &times;
+        </button>
+        
+        <div class="relative w-full h-full">
+            <img id="modalImage" src="" alt="Enlarged Graphic" class="max-h-[90vh] max-w-full mx-auto object-contain rounded-lg shadow-2xl transition-transform duration-300 transform scale-95 opacity-0">
         </div>
-      </div>
-
-      <!-- graphics -->
-      <div class="video-track flex gap-6 pb-6 overflow-x-auto snap-x snap-mandatory hidden" data-cat="other">
-        <div class="tilt-card min-w-[300px] max-w-[300px] snap-start rounded-2xl p-3 glass border border-white/10">
-          <video class="w-full h-[180px] object-contain cursor-pointer" src="https://cdn.coverr.co/videos/coverr-colorful-smoke-5947/1080p.mp4" autoplay muted loop playsinline></video>
-          <div class="pt-3">
-            <div class="font-semibold">Miscellaneous</div>
-            <div class="text-white/60 text-sm">Creative experiments</div>
-          </div>
+        
+        <div id="modalTitle" class="text-white text-center text-lg md:text-xl font-semibold mt-4 bg-black/50 py-2 px-4 rounded-b-lg">
+            Image Title Placeholder
         </div>
+    </div>
+</div>
       </div>
     </div>
   </div>
@@ -395,29 +565,29 @@
     typeLoop();
 
     // Category buttons -> switch active dataset
-    const catButtons = document.querySelectorAll('.cat-btn');
-    const catTitle = document.getElementById('catTitle');
-    const track = document.querySelector('.video-track');
-    const catMap = { short: 'Short Video', long: 'Long Video', ads: 'Advertisement', other: 'Graphics' };
+    // const catButtons = document.querySelectorAll('.cat-btn');
+    // const catTitle = document.getElementById('catTitle');
+    // const track = document.querySelector('.video-track');
+    // const catMap = { short: 'Short Video', long: 'Long Video', ads: 'Advertisement', other: 'Graphics' };
 
-    catButtons.forEach(btn => btn.addEventListener('click', () => {
-      const cat = btn.getAttribute('data-cat');
-      track.setAttribute('data-active', cat);
-      catTitle.textContent = catMap[cat] || 'Short Video';
-      // visual feedback
-      catButtons.forEach(b=>b.classList.remove('ring-2','ring-primary'));
-      btn.classList.add('ring-2','ring-primary');
-    }));
+    // catButtons.forEach(btn => btn.addEventListener('click', () => {
+    //   const cat = btn.getAttribute('data-cat');
+    //   track.setAttribute('data-active', cat);
+    //   catTitle.textContent = catMap[cat] || 'Short Video';
+    //   // visual feedback
+    //   catButtons.forEach(b=>b.classList.remove('ring-2','ring-primary'));
+    //   btn.classList.add('ring-2','ring-primary');
+    // }));
 
-    // Make the four feature cards clickable to switch category
-    document.querySelectorAll('[data-catlink]').forEach(link => {
-      link.addEventListener('click', (e) => {
-        const cat = link.getAttribute('data-catlink');
-        e.preventDefault();
-        document.querySelector(`.cat-btn[data-cat="${cat}"]`).click();
-        document.querySelector('#reels').scrollIntoView({behavior:'smooth'});
-      });
-    });
+    // // Make the four feature cards clickable to switch category
+    // document.querySelectorAll('[data-catlink]').forEach(link => {
+    //   link.addEventListener('click', (e) => {
+    //     const cat = link.getAttribute('data-catlink');
+    //     e.preventDefault();
+    //     document.querySelector(`.cat-btn[data-cat="${cat}"]`).click();
+    //     document.querySelector('#reels').scrollIntoView({behavior:'smooth'});
+    //   });
+    // });
 
     // Perspective tilt while horizontal scrolling
     // function handleTilt(){
@@ -439,48 +609,212 @@
 
     // try
     // Switch category
-const buttons = document.querySelectorAll(".cat-btn");
-const tracks = document.querySelectorAll(".video-track");
-const title = document.getElementById("catTitle");
+document.addEventListener('DOMContentLoaded', () => {
+    const categoryButtons = document.querySelectorAll('.cat-btn');
+    const videoTracks = document.querySelectorAll('.video-track');
+    const catTitle = document.getElementById('catTitle');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const tracksWrapper = document.getElementById('video-tracks-wrapper');
+    let currentTrack = document.getElementById('long-track'); // Default track on load
 
-buttons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const cat = btn.getAttribute("data-cat");
-    title.textContent = btn.textContent;
+    // --- 1. Category Switching Logic ---
+    const switchCategory = (category) => {
+        // 1. Hide all tracks
+        videoTracks.forEach(track => {
+            track.style.display = 'none';
+        });
 
-    // Toggle active button styles
-    buttons.forEach(b => b.classList.remove("bg-white/10"));
-    btn.classList.add("bg-white/10");
+        // 2. Remove 'active' class from all buttons
+        categoryButtons.forEach(btn => {
+            btn.classList.remove('active', 'bg-white/10');
+            btn.classList.add('bg-white/5');
+        });
 
-    // Show/hide video sections
-    tracks.forEach(track => {
-      if (track.getAttribute("data-cat") === cat) {
-        track.classList.remove("hidden");
-      } else {
-        track.classList.add("hidden");
-      }
+        // 3. Find and show the selected track
+        currentTrack = document.getElementById(`${category}-track`);
+        if (currentTrack) {
+            currentTrack.style.display = 'flex';
+            currentTrack.scrollTo({ left: 0, behavior: 'smooth' }); // Reset scroll position
+
+            // 4. Update the title
+            const activeBtn = document.querySelector(`.cat-btn[data-cat="${category}"]`);
+            if (activeBtn) {
+                catTitle.textContent = activeBtn.textContent;
+                activeBtn.classList.add('active', 'bg-white/10');
+                activeBtn.classList.remove('bg-white/5');
+            }
+
+            // 5. Update scroll button states
+            updateScrollButtons();
+        }
+    };
+
+    // Event listeners for category buttons
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const category = button.getAttribute('data-cat');
+            switchCategory(category);
+        });
     });
-  });
+
+    // --- 2. Scroll Button Logic (Desktop) ---
+    const scrollAmount = 350; // Pixels to scroll
+
+    const updateScrollButtons = () => {
+        if (!currentTrack) return;
+        
+        const maxScroll = currentTrack.scrollWidth - currentTrack.clientWidth;
+        const currentScroll = currentTrack.scrollLeft;
+
+        prevBtn.disabled = currentScroll <= 5;
+        nextBtn.disabled = currentScroll >= maxScroll - 5; 
+    };
+
+    prevBtn.addEventListener('click', () => {
+        if (currentTrack) {
+            currentTrack.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        }
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if (currentTrack) {
+            currentTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    });
+
+    // Update buttons on scroll and window resize
+    const tracksWrapperObserver = new MutationObserver(() => {
+        if (currentTrack) {
+            currentTrack.removeEventListener('scroll', updateScrollButtons);
+            currentTrack.addEventListener('scroll', updateScrollButtons);
+            updateScrollButtons(); // Initial check
+        }
+    });
+
+    tracksWrapperObserver.observe(tracksWrapper, { childList: true, subtree: true, attributes: true });
+
+    window.addEventListener('resize', updateScrollButtons);
+
+    // Initial setup (Long Video is default)
+    switchCategory('long');
+    
+    // --- 3. Tilt Card Effect Logic ---
+    const tiltCards = document.querySelectorAll('.tilt-card');
+    const scroll3DContainer = document.getElementById('reels-container'); 
+
+    // This effect is best suited for desktop, so we apply a check
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+    if (!isMobile) {
+        tiltCards.forEach(card => {
+            const track = card.closest('.video-track');
+            if (track) {
+                track.addEventListener('scroll', () => {
+                    // Get card's center position relative to the track's scroll position
+                    const cardCenter = card.offsetLeft + card.clientWidth / 2;
+                    const trackCenter = track.scrollLeft + track.clientWidth / 2;
+                    const delta = cardCenter - trackCenter;
+                    
+                    // Normalize the delta based on track width
+                    const maxDelta = track.clientWidth / 2;
+                    const normalizedDelta = delta / maxDelta; 
+
+                    // Define the max rotation and scaling factor
+                    const maxTilt = 12; // degrees
+                    const rotationY = normalizedDelta * maxTilt;
+                    
+                    // Apply the 3D transform for a subtle effect as it scrolls
+                    card.style.transform = `perspective(1000px) rotateY(${rotationY}deg) scale(1)`;
+                    card.style.transition = 'transform 0.1s ease-out'; // Smooth the effect
+                });
+            }
+        });
+
+        // Reset all cards when the category switches (or when the mouse leaves the track)
+        videoTracks.forEach(track => {
+            track.addEventListener('mouseleave', () => {
+                track.querySelectorAll('.tilt-card').forEach(card => {
+                    card.style.transform = 'perspective(1000px) rotateY(0deg)';
+                });
+            });
+        });
+    }
 });
 
-// Video fullscreen on click
-document.querySelectorAll("video").forEach(video => {
-  video.addEventListener("click", () => {
-    if (video.requestFullscreen) {
-      video.requestFullscreen();
-    } else if (video.webkitRequestFullscreen) { // Safari
-      video.webkitRequestFullscreen();
-    } else if (video.msRequestFullscreen) { // IE/Edge
-      video.msRequestFullscreen();
-    }
-  });
+// Add this code block to your existing script.js, preferably after the initial setup.
+
+// --- 4. Image Modal/Lightbox Logic ---
+const modal = document.getElementById('imageModal');
+const modalImage = document.getElementById('modalImage');
+const modalTitle = document.getElementById('modalTitle');
+const closeModalBtn = document.getElementById('closeModal');
+const imageTriggers = document.querySelectorAll('.modal-trigger');
+
+const openModal = (imageSrc, title) => {
+    // 1. Set content
+    modalImage.src = imageSrc;
+    modalTitle.textContent = title;
+
+    // 2. Display modal container
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    modal.classList.add('opacity-100', 'pointer-events-auto');
+
+    // 3. Animate image for focus
+    setTimeout(() => {
+        modalImage.classList.remove('scale-95', 'opacity-0');
+        modalImage.classList.add('scale-100', 'opacity-100');
+    }, 50);
+
+    // Prevent scrolling on the body when modal is open
+    document.body.style.overflow = 'hidden'; 
+};
+
+const closeModal = () => {
+    // 1. Animate image out
+    modalImage.classList.remove('scale-100', 'opacity-100');
+    modalImage.classList.add('scale-95', 'opacity-0');
+
+    // 2. Hide modal container after transition
+    setTimeout(() => {
+        modal.classList.remove('opacity-100', 'pointer-events-auto');
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        document.body.style.overflow = ''; // Restore body scrolling
+    }, 300);
+};
+
+// Event listener for opening the modal
+imageTriggers.forEach(img => {
+    img.addEventListener('click', (e) => {
+        const src = e.target.src;
+        const title = e.target.getAttribute('data-title');
+        openModal(src, title);
+    });
 });
-    // Pratham 
-   
+
+// Event listeners for closing the modal
+closeModalBtn.addEventListener('click', closeModal);
+
+// Close modal when clicking outside the image (on the black background)
+modal.addEventListener('click', (e) => {
+    if (e.target.id === 'imageModal') {
+        closeModal();
+    }
+});
+
+// Close modal when pressing the Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('opacity-0')) {
+        closeModal();
+    }
+});
+
+// Ensure the category switching logic is still at the bottom, 
+// and the initial switchCategory('long') is called.
+// ... (rest of your existing JS code) ...
   </script>
 </body>
 </html>
-
 
 
 
